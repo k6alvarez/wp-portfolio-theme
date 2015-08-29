@@ -58,3 +58,4 @@ wordpress/wp-trackback.php
 wordpress/xmlrpc.php
 
 *.zip
+wordpress/.htaccess
