@@ -105,3 +105,450 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 # Media
 --------------------------------------------------------------*/
 @import "media/media";
+
+
+/*--------------------------------------------------------------
+# SITE STYLES
+--------------------------------------------------------------*/
+$grid-columns: 12;
+$max-width: 1024px;
+$visual-grid: false;
+$visual-grid-index: front;
+
+@import url(https://fonts.googleapis.com/css?family=Work+Sans:400,500,700|Montserrat:400,700);
+
+$workSans: 'Work Sans', sans-serif;
+$montserrat: 'Montserrat', sans-serif;
+
+@import 'bourbon';
+@import 'neat';
+
+$bodyBG: #212121;
+$fontColor: #5a5a5a;
+$fontColor2: #949494;
+$blue: #6995a9;
+body{
+	background: $bodyBG;
+	color: $fontColor;
+	font-family: $montserrat;
+	font-size: 16px;
+}
+
+h1,.uppercase{
+	font-size: 18px;
+	line-height: 24px;
+	text-transform: uppercase;
+	font-family: $workSans;
+	font-weight: normal;
+	margin: 25px 0;
+}
+
+textarea,input{
+	padding: 20px;
+	font-style: italic;
+}
+
+button, input[type="button"], input[type="reset"], input[type="submit"],
+button:hover, input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover {
+	@include transition(color 0.2s ease);
+    border: 2px solid;
+    border-color: #ccc #ccc #bbb;
+    border-radius: 1px;
+    background: $blue;
+    box-shadow: none;
+    color: white;
+    text-transform: uppercase;
+    font-style: normal;
+    font-size: 16px;    
+    line-height: 1;
+    padding: 10px 20px;
+    text-shadow: none;
+    height: 40px;
+}
+button:hover, input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover{
+	background: $blue - 20;
+}
+ul{
+	float: right;
+	li{
+		padding: 0 20px;
+		a{
+			@extend .uppercase;
+		}
+	}
+}
+
+a,a:active,a:visited,a:hover{
+	color: $fontColor;
+	text-decoration: none;
+}
+a:hover{
+	color: $blue;
+}
+
+.container,.entry-content{
+	@include outer-container();
+	margin: 0 auto;
+}
+.entry-content{
+	padding-bottom: 25px;
+}
+header#masthead{
+	.site-branding{
+		@include span-columns(4);
+		@include omega();
+		.site-title{
+			@extend .uppercase;
+			font-size: 22px;
+			line-height: 24px;
+		}	
+	}
+	#site-navigation{
+		@include span-columns(8);
+		clear: none;
+
+	}
+	
+}
+@include keyframes(rotate) {
+  from {
+    @include transform(perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(0));
+  }
+  to {
+    @include transform(perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(-360deg));
+  }
+}
+
+@include keyframes(flySpaceship) {
+  from {
+    top:-50%;
+    left: -30%;
+    @include transform(scale(0));
+  }
+  to {
+    top:200%;
+    left: 120%;
+    @include transform(scale(1));
+  }
+}
+
+@include keyframes(goPlanet) {
+  0% {
+    top: 10%;
+	right: -20%;
+    @include transform(scale(1));
+  }
+  50% {
+    top: -45%;
+	right: 20%;
+    @include transform(scale(1.2));
+  }
+  85% {
+    top: -110%;
+	right: 50%;
+    @include transform(scale(1.2));
+  }
+  100% {
+    top: -120%;
+	right: 100%;
+    @include transform(scale(0.6));
+  }
+}
+
+@include keyframes(spaceText) {
+  0% {
+    top: 100%;
+  }
+  50% {
+    top: 100%;
+  }
+  55%{
+  	top: 30%
+  }
+  90% {
+    top: 30%;
+  }
+  // 85% {
+  //   top: 10%;
+  // }
+  100% {
+    top: -120%;
+  }
+}
+
+// @keyframes rotate {
+//   0% {
+//     transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(0);
+//   }
+//   100% {
+//     transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(-360deg);
+//   }
+// }
+#stars-contain {
+	@include transform(perspective(500px));
+	@include transform-style(preserve-3d);
+	position: absolute;
+	bottom: -120%;
+	@include perspective-origin(50% 100%);	
+	left: 50%;
+	@include animation(rotate 90s infinite linear);	
+}
+$starsColor: #ffffff;
+#stars .star {
+  width: 2px;
+  height: 2px;
+  background: $starsColor;
+  position: absolute;
+  top: 0;
+  left: 0;
+  @include transform-origin(0 0 -300px);
+  @include transform(translate3d(0, 0, -300px));
+  backface-visibility: hidden;
+}
+$heroBG: #424242;
+.hero{
+	background: $bodyBG + 15;
+	height: 250px;
+	max-height: 250px;
+	overflow: hidden;
+	position: relative;
+	img{
+		width: 100%;
+	}
+	.spaceship{		
+		// Animation shorthand works the same as the CSS3 animation shorthand
+  		@include animation(flySpaceship 10s infinite linear);
+		position: absolute;
+		top: 0;
+		left: 0;	
+		// width: 15px;	
+		
+	}
+	.sun{
+		@include animation(goPlanet 10s infinite linear);
+		position: absolute;
+		top: -25%;
+		right: 10%;
+		.ball {
+		  display: block;
+		  background: black;
+		  margin: 0;
+		  border-radius: 50%;
+		  height: 250px;
+		  width: 250px;
+		  background: radial-gradient(circle at 100px 100px, #5cabff, #000);
+		}
+		.ball .shadow {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		//  background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0) 50%);
+		background: red;
+		-webkit-transform: rotateX(90deg) translateZ(-150px);
+		-moz-transform: rotateX(90deg) translateZ(-150px);
+		-ms-transform: rotateX(90deg) translateZ(-150px);
+		-o-transform: rotateX(90deg) translateZ(-150px);
+		transform: rotateX(90deg) translateZ(-150px);
+		z-index: -1;
+		}
+		.stage {
+		  width: 250px;
+		  height: 250px;
+		  -webkit-perspective: 1200px;
+		  -moz-perspective: 1200px;
+		  -ms-perspective: 1200px;
+		  -o-perspective: 1200px;
+		  perspective: 1200px;
+		  -webkit-perspective-origin: 50% 50%;
+		  -moz-perspective-origin: 50% 50%;
+		  -ms-perspective-origin: 50% 50%;
+		  -o-perspective-origin: 50% 50%;
+		  perspective-origin: 50% 50%;
+		}
+		
+	}
+	.space-text{		
+		.container{
+			div{
+				@include animation(spaceText 10s infinite linear);	
+				position: absolute;
+				top: 100%;
+				h1{
+					line-height: 26px;
+					font-size: 24px;
+					font-family: $montserrat;
+					// font-weight: bold;
+					color: $fontColor2;
+					text-align: center;	
+				}
+			}
+		}
+	}
+}
+
+.content{
+	ul{
+		float: none;
+		clear: both;
+		margin: 0 70px;
+	}
+	h1{
+		@extend .uppercase;
+		font-size: 28px;
+		text-align: center;
+		font-weight: bold;
+		@include span-columns(4);
+		@include shift(4);
+		padding-bottom: 15px;
+		border-bottom: 2px solid $fontColor;		
+	}
+	h2{
+		@extend .uppercase;
+		font-size: 28px;
+		text-align: left;
+	}
+	p{
+		@include span-columns(10);
+		@include shift(1);
+		text-align: center;
+	}
+	
+	&.feature-work{
+		// @include row;
+		// clear: both;
+		background: white;	
+		padding-bottom: 25px;	
+		
+	}
+}
+
+.skills{
+	clear: both;
+	.card{
+		@include transition(all 0.2s ease);
+		@include span-columns(3);
+		background: white;
+		padding: 0 5px 20px 5px;
+		margin-top: 25px;
+		margin-bottom: 25px;
+		p{
+			text-align: center;
+			@include fill-parent();
+			@include shift(0);
+		}
+		.logo{
+			@include transition(all 0.2s ease);
+			height: 86px;
+		}
+		&:hover{
+			.logo{
+				// @include transform(scale(1.1));
+			}
+		}
+		.title{
+			text-transform: uppercase;
+		}
+		.caption{
+			font-style: italic;
+			font-size: 12px;
+		}
+	}
+}
+
+.thumbnail{
+	@include span-columns(4);	
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 180px;
+	overflow: hidden;
+	&.last{
+		margin-right: 0;
+	}
+	.more-info{
+		display: none;
+	}
+}
+
+.contact{	
+	p{
+		@include fill-parent();
+		@include shift(0);
+		text-align: left;
+	}
+	.map{
+		@include span-columns(5);
+	}
+	.form{
+		@include span-columns(7);
+		div.wpcf7-mail-sent-ok,div.wpcf7-validation-errors{
+			border:none;
+		}
+		form{
+			p{
+				margin: 0;
+			}
+			.your-email{
+				height: 40px;
+				@include span-columns(4 of 7);
+				overflow: hidden;
+				border-radius: 2px;
+			}
+			input[type="text"]{
+				padding: 20px;
+				height: 40px;				
+				@include span-columns(4 of 7);
+			}
+			input[type="email"]{
+				height: 40px;	
+				padding-left: 20px;
+				color: $fontColor2;
+				font-style: italic;			
+			}
+			input[type="submit"]{
+				@include span-columns(3 of 7);
+				@include omega();
+			}
+		}			
+	}
+}
+
+footer{
+	color: $fontColor2;
+	a{
+		color: $fontColor2 - 20;
+	}
+	.site-info{
+		padding: 15px 0;
+		margin-top: 25px;
+		background: #4f4f4f;
+	}
+	#map {
+		width: 100%;
+		height: 330px;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
