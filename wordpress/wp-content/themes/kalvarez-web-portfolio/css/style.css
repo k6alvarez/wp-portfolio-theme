@@ -703,6 +703,8 @@ body {
   color: #5a5a5a;
   font-family: "Montserrat", sans-serif;
   font-size: 16px; }
+  body.modal-on {
+    overflow: hidden; }
 
 h1, .uppercase, ul li a, header#masthead .site-branding .site-title, .content h1, .content h2 {
   font-size: 18px;
@@ -1128,6 +1130,24 @@ header#masthead #site-navigation {
   .thumbnail .more-info {
     display: none; }
 
+.modal a {
+  cursor: default; }
+
+.more-info .title {
+  font-size: 24px;
+  color: #949494;
+  text-align: center;
+  margin-top: 75px; }
+.more-info .description {
+  float: left;
+  display: block;
+  margin-right: 2.3576515979%;
+  width: 65.8807828007%;
+  margin-left: 17.0596085997%;
+  text-align: center; }
+  .more-info .description:last-child {
+    margin-right: 0; }
+
 .contact p {
   width: 100%;
   margin-left: 0%;
@@ -1182,6 +1202,23 @@ header#masthead #site-navigation {
     margin-right: 0; }
     .contact .form form input[type="submit"]:last-child {
       margin-right: 0; }
+
+div.modal {
+  background: #212121;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; }
+  div.modal a {
+    display: block;
+    text-align: center;
+    clear: both; }
+  div.modal #close {
+    position: fixed;
+    top: 10px;
+    right: 20px; }
 
 footer {
   color: #949494; }
