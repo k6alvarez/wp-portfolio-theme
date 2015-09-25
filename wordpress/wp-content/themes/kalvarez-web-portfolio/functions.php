@@ -285,7 +285,8 @@ function skills_shortcode_output() {
 	
 		<div class="skills">
 			<?php foreach($skillsData as $skill):?>
-				<div class="card" onMouseOver="this.style.background='<?php echo $skill->hoverColor; ?>'" onMouseOut="this.style.background='#fff'">
+				<div class="card">
+				<!-- <div class="card" onMouseOver="this.style.background='<?php echo $skill->hoverColor; ?>'" onMouseOut="this.style.background='#fff'"> -->
 					<p class="logo"><img src="<?php echo $skill->image; ?>" alt=""></p>
 					<p class="title"><?php echo $skill->title; ?></p>					
 					<p class="caption"><?php echo $skill->caption; ?></p>							

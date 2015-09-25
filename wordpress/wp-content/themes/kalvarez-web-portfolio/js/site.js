@@ -47,6 +47,14 @@ jQuery(document).ready(function($) {
 	};
 
 	//thumbnails
+	$('.thumbnail').on('mouseenter',function(){
+		var esto = $(this);
+		esto.find('.title').removeClass('bye');
+	});
+	$('.thumbnail').on('mouseout',function(){
+		var esto = $(this);
+		esto.find('.title').addClass('bye');
+	});
 	$('.thumbnail a.trigger').on('click',function(e){
 		e.preventDefault();
 		var esto = $(this);	

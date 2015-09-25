@@ -127,9 +127,21 @@ $bodyBG: #212121;
 $fontColor: #5a5a5a;
 $fontColor2: #949494;
 $blue: #6995a9;
+
+
+// $largDesktop: new-breakpoint(max-width 1024);
+// $smallDesktop: new-breakpoint(min-width 768px max-width 1023px);
+// $allMobile: new-breakpoint(max-width 767px);
+// $tablet: new-breakpoint(min-width 640px max-width 767px);
+// $smallTablet: new-breakpoint(min-width 480px max-width 639px);
+// $phone: new-breakpoint(max-width 479px);
+//media query
+$allMobile: new-breakpoint(max-width 37.5em);
+
+
 body{
 	background: $bodyBG;
-	color: $fontColor;
+	color: $fontColor2;
 	font-family: $montserrat;
 	font-size: 16px;
 	&.modal-on{
@@ -182,7 +194,7 @@ ul{
 }
 
 a,a:active,a:visited,a:hover{
-	color: $fontColor;
+	color: $fontColor2;
 	text-decoration: none;
 }
 a:hover{
@@ -209,6 +221,13 @@ header#masthead{
 	#site-navigation{
 		@include span-columns(8);
 		clear: none;
+		#primary-menu{
+			@include media($allMobile){
+				a{
+					font-size: 14px;
+				}
+			}
+		}
 
 	}
 	
@@ -381,7 +400,7 @@ $heroBG: #424242;
 					font-size: 24px;
 					font-family: $montserrat;
 					// font-weight: bold;
-					color: $fontColor2;
+					color: $fontColor;
 					text-align: center;	
 				}
 			}
@@ -394,6 +413,9 @@ $heroBG: #424242;
 		float: none;
 		clear: both;
 		margin: 0 70px;
+		@include media($allMobile){
+			margin: 0 10px;
+		}
 	}
 	h1{
 		@extend .uppercase;
@@ -403,7 +425,11 @@ $heroBG: #424242;
 		@include span-columns(4);
 		@include shift(4);
 		padding-bottom: 15px;
-		border-bottom: 2px solid $fontColor;		
+		border-bottom: 2px solid $fontColor2;		
+		@include media($allMobile){
+			@include fill-parent();
+			@include shift(0);
+		}
 	}
 	h2{
 		@extend .uppercase;
@@ -434,6 +460,12 @@ $heroBG: #424242;
 		padding: 0 5px 20px 5px;
 		margin-top: 25px;
 		margin-bottom: 25px;
+		@include media($allMobile){
+			@include span-columns(5.5);
+			@include omega();
+			@include shift(0.5);
+			height: 280px;
+		}
 		p{
 			text-align: center;
 			@include fill-parent();
@@ -457,18 +489,80 @@ $heroBG: #424242;
 		}
 	}
 }
-
+@include keyframes (goTitle){
+	0%{
+		@include transform(translateY(-200%));
+	}
+	100%{
+		@include transform(translateY(0%));
+	}
+}
+@include keyframes (byeTitle){
+	0%{
+		@include transform(translateY(0%));
+	}
+	100%{
+		@include transform(translateY(-200%));
+	}
+}
 .thumbnail{
 	@include span-columns(4);	
 	margin-top: 10px;
 	margin-bottom: 10px;
 	height: 180px;
 	overflow: hidden;
+	position: relative;
+	@include media($allMobile){
+		@include span-columns(5.5);
+		@include omega();
+		@include shift(0.5);
+	}
 	&.last{
 		margin-right: 0;
+	}	
+	.trigger{
+		img{
+			@include transition(all 0.4s ease);
+			@include transform(scale(1));
+			// @include filter(sepia(0.5));
+		}
 	}
-	.more-info{
-		display: none;		
+	p.title{
+		// background: rgba(227,58,58,1);
+		background: #4f4f4f;
+		display: none;
+		color: $fontColor2;
+		position: absolute;
+		top: 25%;
+		left: 0;
+		padding: 10px;
+		margin: 0;
+		width: 100%;
+		z-index: 10;
+		@include transform(translateY(-200%));
+		&.bye{
+			display: block;
+			@include animation(byeTitle 0.3s ease);
+			@include animation-fill-mode(forwards);
+		}
+	}
+	p.description{
+		display: none;
+	}
+}
+.thumbnail:hover{
+	.trigger{
+		img{
+			@include transform(scale(1.1));
+			
+		}
+	}
+	p.title{
+		// Animation shorthand works the same as the CSS3 animation shorthand
+  		// @include animation(scale 1.0s ease-in, slide 2.0s ease);
+		display: block;
+		@include animation(goTitle 0.4s 0.2s ease);
+		@include animation-fill-mode(forwards);
 	}
 }
 .modal{
@@ -488,6 +582,10 @@ $heroBG: #424242;
 		@include span-columns(8 of 12);
 		@include shift(2);
 		text-align: center;
+		@include media($allMobile){
+			@include span-columns(10 of 12);
+			@include shift(1);
+		}
 	}
 }
 
@@ -499,11 +597,19 @@ $heroBG: #424242;
 	}
 	.map{
 		@include span-columns(5);
+		@include media($allMobile){
+			@include span-columns(11);
+			@include shift(0.5);
+		}
 	}
 	.form{
 		@include span-columns(7);
 		div.wpcf7-mail-sent-ok,div.wpcf7-validation-errors{
 			border:none;
+		}
+		@include media($allMobile){
+			@include span-columns(11);
+			@include shift(0.5);
 		}
 		form{
 			p{
@@ -523,7 +629,7 @@ $heroBG: #424242;
 			input[type="email"]{
 				height: 40px;	
 				padding-left: 20px;
-				color: $fontColor2;
+				color: $fontColor;
 				font-style: italic;			
 			}
 			input[type="submit"]{
@@ -560,23 +666,43 @@ div.modal{
 
 
 footer{
-	color: $fontColor2;
+	color: $fontColor;
 	a{
-		color: $fontColor2 - 20;
+		color: $fontColor - 20;
 	}
 	.site-info{
+		color: $fontColor2;
 		padding: 15px 0;
 		margin-top: 25px;
 		background: #4f4f4f;
+		a{
+			color: $fontColor2 - 20;
+		}
 	}
 	#map {
 		width: 100%;
 		height: 330px;
+		@include media($allMobile){
+			height: 150px;
+		}
+	}
+	.content{
+		h1{
+			border-bottom: 2px solid $fontColor;
+		}
 	}
 }
 
 
-
+// MOBILE
+@media screen and (max-width: 37.5em) {
+	.menu-toggle{
+		display: none;
+	}
+	.main-navigation ul{
+		display: block;
+	}
+}
 
 
 
