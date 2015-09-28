@@ -41,7 +41,10 @@ jQuery(document).ready(function($) {
 		},
 		kill: function(){
 			$('body').removeClass('modal-on');
-			$('div.modal').remove();
+			$('div.modal').addClass('bye');
+			setTimeout(function(){
+				$('div.modal').remove();
+			}, 400);
 		}
 
 	};

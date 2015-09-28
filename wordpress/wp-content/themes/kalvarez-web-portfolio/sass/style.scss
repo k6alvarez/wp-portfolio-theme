@@ -491,7 +491,7 @@ $heroBG: #424242;
 }
 @include keyframes (goTitle){
 	0%{
-		@include transform(translateY(-200%));
+		@include transform(translateY(-250%));
 	}
 	100%{
 		@include transform(translateY(0%));
@@ -502,7 +502,7 @@ $heroBG: #424242;
 		@include transform(translateY(0%));
 	}
 	100%{
-		@include transform(translateY(-200%));
+		@include transform(translateY(-250%));
 	}
 }
 .thumbnail{
@@ -539,7 +539,7 @@ $heroBG: #424242;
 		margin: 0;
 		width: 100%;
 		z-index: 10;
-		@include transform(translateY(-200%));
+		@include transform(translateY(-250%));
 		&.bye{
 			display: block;
 			@include animation(byeTitle 0.3s ease);
@@ -565,10 +565,33 @@ $heroBG: #424242;
 		@include animation-fill-mode(forwards);
 	}
 }
+@include keyframes (goModal){
+	0%{
+		@include transform(translateY(100%));
+	}
+	100%{
+		@include transform(translateY(0%));
+	}
+}
+@include keyframes (byeModal){
+	0%{
+		@include transform(translateY(0%));
+	}
+	100%{
+		@include transform(translateY(100%));
+	}
+}
 .modal{
+	z-index: 100;
+	@include animation(goModal 0.4s ease);
+	@include animation-fill-mode(forwards);
 	a{
 		//TODO REMOVE THIS
 		cursor:default;
+	}
+	&.bye{
+		@include animation(byeModal 0.4s ease);
+		@include animation-fill-mode(forwards);
 	}
 }
 .more-info{
@@ -659,6 +682,7 @@ div.modal{
 	}
 	#close{
 		position: fixed;
+		cursor: pointer;
 		top: 10px;
 		right: 20px;
 	}
